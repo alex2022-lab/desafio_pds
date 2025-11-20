@@ -10,9 +10,10 @@ export class TicketRepositoryAdapter implements TicketRepositoryPort {
   }
 
   async findAllByEventId(eventId: string): Promise<Ticket[]> {
-    const respone = await request(this.baseUrl).get(`/event/${eventId}/ticket`);
-
-    return respone.body;
+    const response = await request(this.baseUrl).get(
+      `/event/${eventId}/ticket`,
+    );
+    return response.body;
   }
 
   findById(id: string): Promise<Ticket | null> {

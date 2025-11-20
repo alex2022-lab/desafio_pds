@@ -18,10 +18,6 @@ describe('VerifyEventAvailabilityUseCase', () => {
   it('should be defined', () => {
     expect(useCase).toBeDefined();
   });
-  it('execute params', async () => {
-    const eventId = 'event123';
-    await useCase.execute(eventId);
-  });
   it('execute should return availability', async () => {
     const eventId = 'event123';
     ticketRepo.findAll = jest

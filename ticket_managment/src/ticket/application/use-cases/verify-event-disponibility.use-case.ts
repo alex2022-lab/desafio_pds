@@ -5,6 +5,7 @@ import {
 } from '../../domain/repository/ticket.repository.port';
 import { TicketAvailabilityOut } from '../dto/get-ticket.availability.out';
 import { TicketType } from '../../domain/enum/ticket.type';
+import { Ticket } from '../../domain/entities/ticket.entity';
 
 @Injectable()
 export class VerifyEventAvailabilityUseCase {
@@ -15,19 +16,16 @@ export class VerifyEventAvailabilityUseCase {
   async execute(eventId: string): Promise<TicketAvailabilityOut[]> {
     const allTickets = await this.ticketRepository.findAll();
 
-    const availability: TicketAvailabilityOut[] = [
-      {
-        type: TicketType.GENERAL,
-        availableTickets: 50,
-        soldTickets: 40,
-      },
-      {
-        type: TicketType.VIP,
-        availableTickets: 30,
-        soldTickets: 20,
-      },
-    ];
+    if (!allTickets.length) {
+      return [];
+    }
 
-    return availability; // Placeholder implementation
+    return allTickets.map(
+      (ticket: Ticket): TicketAvailabilityOut => ({
+        type: ticket.type,
+        availableTickets: ticket.availableQuantity,
+        soldTickets: ticket.soldTickets,
+      }),
+    );
   }
 }

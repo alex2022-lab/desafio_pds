@@ -1,26 +1,4 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
+c
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
@@ -68,31 +46,48 @@ $ npm install -g @nestjs/mau
 $ mau deploy
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Módulos a Implementar:
+Módulo de Base de Datos:
 
-## Resources
+Objetivo: Gestionar toda la información relacionada con el evento masivo, sirviendo de núcleo central para el almacenamiento de datos.
+Datos a Almacenar:
+Evento: ID, nombre, fecha, ubicación, tipo, descripción.
+Asistentes: ID, nombre, correo electrónico, teléfono, estado (confirmado/no confirmado).
+Entradas: ID, tipo (general, VIP), precio, cantidad disponible, cantidad vendida.
+Notificaciones: ID, tipo (correo, SMS), mensaje, fecha de envío, destinatario(s).
+Responsabilidades: Proporcionar una API para realizar operaciones CRUD (crear, leer, actualizar y eliminar) sobre los datos del evento, asistentes, entradas y notificaciones.
+Módulo de Gestión de Entradas:
 
-Check out a few resources that may come in handy when working with NestJS:
+Objetivo: Gestionar la venta y el control de las entradas para el evento.
+Dependencia: Se comunicará con el Módulo de Base de Datos para verificar la disponibilidad de entradas y registrar las ventas.
+Funcionalidades:
+Verificar la disponibilidad de entradas.
+Registrar la compra de entradas, reduciendo el número de entradas disponibles.
+Actualizar la información de las entradas (por ejemplo, tipos y precios).
+Módulo de Gestión de Asistentes:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Objetivo: Administrar la información de los asistentes al evento.
+Dependencia: Utilizará el Módulo de Base de Datos para almacenar y actualizar los datos de los asistentes.
+Funcionalidades:
+Registrar nuevos asistentes.
+Confirmar o cancelar la asistencia de un usuario.
+Consultar la lista de asistentes registrados.
+Módulo de Notificaciones:
 
-## Support
+Objetivo: Enviar notificaciones a los asistentes relacionadas con el evento.
+Dependencia: Se comunicará con el Módulo de Base de Datos para obtener la lista de destinatarios y registrar el envío de notificaciones.
+Funcionalidades:
+Enviar notificaciones por correo electrónico o SMS.
+Registrar las notificaciones enviadas en la base de datos.
+Consultar el historial de notificaciones.
+Requisitos Técnicos:
+Estructura de Microservicios:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Cada módulo deberá implementarse como un microservicio independiente que exponga su funcionalidad a través de una API REST.
+Los microservicios deben desarrollarse utilizando al menos dos lenguajes de programación diferentes (por ejemplo, dos en Node.js con Express y dos en Python con Flask).
+Desarrollo de los Módulos: El desarrollo de los módulos debe estar bajo la metodología TDD.
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Módulo de Base de Datos: Se encargará de la gestión de datos mediante operaciones CRUD para eventos, asistentes, entradas y notificaciones. Debe utilizar una base de datos SQL o NoSQL y proporcionar una API que permita su interacción.
+Módulo de Gestión de Entradas: Interactuará con el Módulo de Base de Datos para verificar la disponibilidad de entradas, registrar ventas y actualizar información.
+Módulo de Gestión de Asistentes: Permitirá el registro y la actualización de datos de asistentes, y deberá interactuar con el Módulo de Base de Datos para llevar a cabo estas operaciones.
+Módulo de Notificaciones: Enviará notificaciones a los asistentes y registrará dichas notificaciones en la base de datos, requiriendo comunicación con el Módulo de Base de Datos.

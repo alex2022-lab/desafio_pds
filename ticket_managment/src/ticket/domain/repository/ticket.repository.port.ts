@@ -1,4 +1,5 @@
 import { Ticket } from '../entities/ticket.entity';
+import { TicketType } from '../enum/ticket.type';
 export const TICKET_REPOSITORY_PORT = 'TICKET_REPOSITORY_PORT';
 export interface TicketRepositoryPort {
   findAllByEventId(eventId: string): Promise<Ticket[]>;

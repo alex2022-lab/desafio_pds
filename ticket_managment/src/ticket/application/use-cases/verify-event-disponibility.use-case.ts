@@ -14,7 +14,7 @@ export class VerifyEventAvailabilityUseCase {
     private readonly ticketRepository: TicketRepositoryPort,
   ) {}
   async execute(eventId: string): Promise<TicketAvailabilityOut[]> {
-    const allTickets = await this.ticketRepository.findAll();
+    const allTickets = await this.ticketRepository.findAllByEventId(eventId);
 
     if (!allTickets.length) {
       return [];

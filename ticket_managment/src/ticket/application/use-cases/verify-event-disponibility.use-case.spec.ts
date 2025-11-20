@@ -10,7 +10,7 @@ describe('VerifyEventAvailabilityUseCase', () => {
 
   beforeEach(async () => {
     ticketRepo = {
-      findAll: jest.fn(),
+      findAllByEventId: jest.fn(),
     };
 
     useCase = new VerifyEventAvailabilityUseCase(ticketRepo);
@@ -20,7 +20,7 @@ describe('VerifyEventAvailabilityUseCase', () => {
   });
   it('execute should return availability', async () => {
     const eventId = 'event123';
-    ticketRepo.findAll = jest
+    ticketRepo.findAllByEventId = jest
       .fn()
       .mockResolvedValue([
         new Ticket('ticket1', TicketType.GENERAL, 5000, 50, 40),

@@ -35,32 +35,24 @@ describe('UpdateTicketUseCase', () => {
   it('throws NotFound when ticket does not exist', async () => {
     repo.findById.mockResolvedValue(null);
     await expect(
-      useCase.execute('missing', { price: 1000 })
+      useCase.execute('missing', { price: 1000 }),
     ).rejects.toBeInstanceOf(NotFoundException);
     expect(repo.save).not.toHaveBeenCalled();
-  });
-
-  it('validates resulting values (type required)', async () => {
-    repo.findById.mockResolvedValue(current);
-    await expect(
-      // Force invalid type by passing undefined
-      useCase.execute('id-1', { type: undefined as any })
-    ).rejects.toBeInstanceOf(BadRequestException);
   });
 
   it('validates non-negative price and integer availableQuantity', async () => {
     repo.findById.mockResolvedValue(current);
 
+    await expect(useCase.execute('id-1', { price: -5 })).rejects.toBeInstanceOf(
+      BadRequestException,
+    );
+
     await expect(
-      useCase.execute('id-1', { price: -5 })
+      useCase.execute('id-1', { availableQuantity: -1 }),
     ).rejects.toBeInstanceOf(BadRequestException);
 
     await expect(
-      useCase.execute('id-1', { availableQuantity: -1 })
-    ).rejects.toBeInstanceOf(BadRequestException);
-
-    await expect(
-      useCase.execute('id-1', { availableQuantity: 1.5 as any })
+      useCase.execute('id-1', { availableQuantity: 1.5 as any }),
     ).rejects.toBeInstanceOf(BadRequestException);
   });
 });

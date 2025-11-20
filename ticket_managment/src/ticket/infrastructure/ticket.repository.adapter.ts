@@ -1,0 +1,1 @@
+export class TicketRepositoryAdapter implements TicketRepositoryAdapter {}

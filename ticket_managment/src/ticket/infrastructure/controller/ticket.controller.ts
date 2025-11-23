@@ -11,11 +11,11 @@ export class TicketController {
     private readonly purchaseTicketsUseCase: PurchaseTicketsUseCase,
   ) {}
 
-  @Get(':id/tickets/availability')
+  @Get(':id/ticket/availability')
   async getAvailability(@Param('id') id: string) {
     return this.verifyEventAvailability.execute(id);
   }
-  @Post(':id/tickets/purchase')
+  @Post(':id/ticket/purchase')
   async purchaseTickets(
     @Param('id') eventId: string,
     @Body() body: PurchaseTicketsDto,

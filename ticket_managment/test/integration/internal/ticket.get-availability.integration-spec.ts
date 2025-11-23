@@ -41,7 +41,7 @@ describe('Ticket GetAvailability', () => {
 
     const eventId = 134;
     return request(app.getHttpServer())
-      .get(`/event/${eventId}/tickets/availability`)
+      .get(`/event/${eventId}/ticket/availability`)
       .expect(200)
       .expect([
         { type: 'GENERAL', availableTickets: 100, soldTickets: 50 },

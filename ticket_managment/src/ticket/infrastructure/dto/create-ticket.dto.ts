@@ -1,6 +1,7 @@
 import { TicketType } from '../../domain/enum/ticket.type';
 
-export interface CreateTicketDto {
+export class CreateTicketDto {
+  eventId: string;
   type: TicketType;
   price: number;
   availableQuantity: number;

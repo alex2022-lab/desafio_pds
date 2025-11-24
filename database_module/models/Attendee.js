@@ -30,5 +30,13 @@ const Attendee = sequelize.define('Attendee', {
     timestamps: false
 });
 
+Attendee.associate = (models) => {
+  // Un asistente puede tener muchos tickets
+  Attendee.hasMany(models.Ticket, { foreignKey: 'attendee_id', as: 'tickets' });
+
+  // Un asistente puede recibir muchas notificaciones
+  Attendee.hasMany(models.Notification, { foreignKey: 'attendee_id', as: 'notifications' });
+};
+
 
 module.exports = Attendee;

@@ -22,11 +22,36 @@ const Notification = sequelize.define('Notification', {
     },
     recipients: {
         type: DataTypes.STRING
-    }
+    },
+    attendee_id: { 
+        type: DataTypes.INTEGER 
+    },   
+    event_id: { 
+        type: DataTypes.INTEGER 
+    },      
+    ticket_id: { 
+        type: DataTypes.INTEGER 
+    },
 }, {
     tableName: 'notifications',
     timestamps: false
 });
 
+Notification.associate = (models) => {
+    Notification.belongsTo(models.Attendee, {
+        foreignKey: 'attendee_id',
+        as: 'attendee'
+    });
+
+    Notification.belongsTo(models.Event, {
+        foreignKey: 'event_id',
+        as: 'event'
+    });
+
+    Notification.belongsTo(models.Ticket, {
+        foreignKey: 'ticket_id',
+        as: 'ticket'
+    });
+};
 
 module.exports = Notification;

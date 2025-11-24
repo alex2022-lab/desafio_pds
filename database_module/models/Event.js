@@ -33,5 +33,10 @@ const Event = sequelize.define('Event', {
     timestamps: false
 });
 
+Event.associate = (models) => {
+  Event.hasMany(models.Ticket, { foreignKey: 'event_id', as: 'tickets' });
+  Event.hasMany(models.Notification, { foreignKey: 'event_id', as: 'notifications' });
+};
+
 
 module.exports = Event;

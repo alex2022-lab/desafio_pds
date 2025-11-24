@@ -23,11 +23,24 @@ const Ticket = sequelize.define('Ticket', {
     sold: {
         type: DataTypes.INTEGER,
         defaultValue: 0
-    }
+    },
+    event_id: { 
+        type: DataTypes.INTEGER 
+    },
+    attendee_id: { 
+        type: DataTypes.INTEGER 
+    },
 }, {
     tableName: 'tickets',
     timestamps: false
 });
+
+Ticket.associate = (models) => {
+  Ticket.belongsTo(models.Event, { foreignKey: 'event_id', as: 'event' });
+  Ticket.belongsTo(models.Attendee, { foreignKey: 'attendee_id', as: 'attendee' });
+  Ticket.hasMany(models.Notification, { foreignKey: 'ticket_id', as: 'notifications' });
+};
+
 
 
 module.exports = Ticket;

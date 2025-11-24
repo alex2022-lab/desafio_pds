@@ -8,5 +8,6 @@ export class PurchaseTicketsDto {
   @IsNumber()
   quantity: number;
 
+  @IsNotEmpty()
   ticketType: TicketType;
 }

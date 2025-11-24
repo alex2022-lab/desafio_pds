@@ -12,8 +12,8 @@ export class TicketController {
   ) {}
 
   @Get(':id/ticket/availability')
-  async getAvailability(@Param('id') id: string) {
-    return this.verifyEventAvailability.execute(id);
+  async getAvailability(@Param('id') eventId: string) {
+    return this.verifyEventAvailability.execute(eventId);
   }
   @Post(':id/ticket/purchase')
   async purchaseTickets(

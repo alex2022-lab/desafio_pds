@@ -5,5 +5,6 @@ export interface TicketRepositoryPort {
   findAllByEventId(eventId: string): Promise<Ticket[]>;
   findById(id: string): Promise<Ticket | null>;
   save(ticket: Ticket): Promise<void>;
+  saveWithEventId(ticket: Ticket, eventId: string): Promise<void>;
   delete(id: string): Promise<void>;
 }

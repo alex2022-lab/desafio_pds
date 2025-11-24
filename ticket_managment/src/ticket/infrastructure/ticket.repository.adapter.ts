@@ -4,14 +4,15 @@ import request from 'supertest';
 import { TicketType } from '../domain/enum/ticket.type';
 
 export class TicketRepositoryAdapter implements TicketRepositoryPort {
-  private baseUrl = 'http://localhost:3101';
+  private readonly BASE_URL = 'http://localhost:3101';
+  private readonly TICKET_PATH = '/tickets';
 
   delete(id: string): Promise<void> {
     return Promise.resolve(undefined);
   }
 
   async findAllByEventId(eventId: string): Promise<Ticket[]> {
-    const response = await request(this.baseUrl).get(
+    const response = await request(this.BASE_URL).get(
       `/event/${eventId}/ticket`,
     );
     return response.body;
@@ -22,13 +23,14 @@ export class TicketRepositoryAdapter implements TicketRepositoryPort {
     type: TicketType,
     quantity: number,
   ): Promise<void> {
-    const response = await request(this.baseUrl)
+    const response = await request(this.BASE_URL)
       .post(`/event/${eventId}/ticket/purchase`)
       .send({ type, quantity })
       .set('Accept', 'application/json');
     if (response.status >= 400) {
       throw new Error(
-        response.body?.message || `Failed to purchase tickets: ${response.status}`,
+        response.body?.message ||
+          `Failed to purchase tickets: ${response.status}`,
       );
     }
   }
@@ -38,6 +40,9 @@ export class TicketRepositoryAdapter implements TicketRepositoryPort {
   }
 
   save(ticket: Ticket): Promise<void> {
+    return Promise.resolve(undefined);
+  }
+  saveWithEventId(ticket: Ticket, eventId: string): Promise<void> {
     return Promise.resolve(undefined);
   }
 }

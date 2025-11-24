@@ -1,7 +1,15 @@
 
 jest.mock('sequelize', () => {
     const sequelizeMock = jest.fn().mockImplementation(() => ({
-        authenticate: jest.fn()
+        authenticate: jest.fn(),
+        config: {
+            database: process.env.DB_NAME,
+            username: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            host: process.env.DB_HOST,
+            port: process.env.DB_PORT,
+            dialect: 'postgres'
+        }
     }));
     return { Sequelize: sequelizeMock };
 });
@@ -31,6 +39,13 @@ describe('Simulacion de conexion a la base de datos', () => {
             })
         );
 
+    });
+
+   test('Usa el puerto correcto', () => {
+        process.env.DB_PORT = '5432';
+        jest.resetModules();
+        const sequelize = require('../config/database');
+        expect(sequelize.config.port).toBe('5432');
     });
 });
 

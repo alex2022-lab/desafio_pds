@@ -1,0 +1,47 @@
+{
+  "name": "notification-microservice",
+  "version": "1.0.0",
+  "description": "Microservicio para gestionar notificaciones",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "nest start",
+    "build": "nest build",
+    "test": "jest",
+    "test:e2e": "jest --config jest-e2e.json",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@nestjs/common": "^9.0.0",
+    "@nestjs/core": "^9.0.0",
+    "@nestjs/platform-express": "^9.0.0",
+    "rxjs": "^7.0.0",
+    "class-validator": "^0.13.0",
+    "class-transformer": "^0.5.0"
+  },
+  "devDependencies": {
+    "@nestjs/testing": "^9.0.0",
+    "jest": "^27.0.0",
+    "ts-jest": "^27.0.0",
+    "ts-jest/utils": "^27.0.0",
+    "supertest": "^6.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^2.0.0",
+    "typescript": "^4.0.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "testEnvironment": "node"
+  },
+  "author": "",
+  "license": "MIT"
+}

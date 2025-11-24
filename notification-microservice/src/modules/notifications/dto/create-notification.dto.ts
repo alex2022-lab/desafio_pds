@@ -1,6 +1,20 @@
+import { IsString, IsNotEmpty, IsDate, IsArray } from 'class-validator';
+import { Type } from 'class-transformer';
+
 export class CreateNotificationDto {
-  type: string;
-  message: string;
-  date: Date;
-  recipients: string[];
+  @IsString()
+  @IsNotEmpty()
+  type!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  message!: string;
+
+  @IsDate()
+  @Type(() => Date)
+  date!: Date;
+
+  @IsArray()
+  @IsString({ each: true })
+  recipients!: string[];
 }
